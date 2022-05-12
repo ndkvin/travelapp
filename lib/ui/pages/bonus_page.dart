@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:travelapp/ui/widgets/custom_button.dart';
 
 class BonusPage extends StatelessWidget {
   const BonusPage({ Key? key }) : super(key: key);
@@ -106,7 +107,7 @@ class BonusPage extends StatelessWidget {
                 fontSize: 38
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -118,28 +119,6 @@ class BonusPage extends StatelessWidget {
             )
           ]
         )
-      );
-    }
-
-    Widget StartButton() {
-      return InkWell(
-        onTap: () {
-          
-        },
-        child: Container(
-          height: 55,
-          width: 220,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(defaultRadius),
-            color: purpleColor,
-          ),
-          child: Center(
-            child: Text(
-              'Get Started',
-              style: whiteMediumTextStyle,
-            ),
-          ),
-        ),
       );
     }
 
@@ -161,7 +140,13 @@ class BonusPage extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              StartButton(),
+              CustomButton(
+                width: 220,
+                message: 'Get Started',
+                onTap: () {
+                  Navigator.pushNamed(context, '/main');
+                }
+              ),
             ],
           ),
         ),

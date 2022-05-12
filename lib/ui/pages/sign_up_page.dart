@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:travelapp/ui/widgets/custom_button.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({ Key? key }) : super(key: key);
@@ -161,30 +162,6 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    Widget submitButton(BuildContext context) {
-      return InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/bonus');
-        },
-        child: Container(
-          margin: const EdgeInsets.only(
-            top: 20,
-          ),
-          height: 55,
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(defaultRadius),
-            color: purpleColor,
-          ),
-          child: Center(
-            child: Text(
-              'Get Started',
-              style: whiteMediumTextStyle,
-            ),
-          ),
-        ),
-      );
-    } 
 
     return Container(
       margin: const EdgeInsets.only(
@@ -204,7 +181,16 @@ class SignUpPage extends StatelessWidget {
           emailInput(),
           passwordInput(),
           hobbyInput(),
-          submitButton(context),
+          CustomButton(
+            width: double.infinity,
+            message: 'Get Started',
+            onTap: () {
+              Navigator.pushNamed(context, '/bonus');
+            },
+            margin: const EdgeInsets.only(
+              top: 30,
+            ),
+          )
         ]
       ),
     );

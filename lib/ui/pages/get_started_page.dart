@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelapp/shared/theme.dart';
-import 'package:travelapp/ui/pages/sign_up_page.dart';
+import 'package:travelapp/ui/widgets/custom_button.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({ Key? key }) : super(key: key);
@@ -35,26 +35,14 @@ class GetStartedPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
-            InkWell(
+            CustomButton(
+              width: 220,
+              message: 'Get Started',
               onTap: () {
                 Navigator.pushNamed(context, '/sign-up');
               },
-              child: Container(
-                height: 55,
-                width: 220,
-                decoration: BoxDecoration(
-                  color: purpleColor,
-                  borderRadius: BorderRadius.circular(defaultRadius)
-                ),
-                child: Center(
-                  child: Text(
-                    'Get Stratred',
-                    style: whiteMediumTextStyle
-                  ),
-                ),
-              ),
             ),
             const SizedBox(
               height: 80,
