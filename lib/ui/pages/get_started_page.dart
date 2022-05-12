@@ -39,11 +39,7 @@ class GetStartedPage extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return const SignUpPage();
-                  }
-                ));
+                Navigator.pushNamed(context, '/sign-up');
               },
               child: Container(
                 height: 55,

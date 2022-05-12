@@ -18,7 +18,7 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Widget input() {
+  Widget input(BuildContext context) {
 
     Widget nameInput() {
       return Container(
@@ -161,10 +161,10 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    Widget submitButton() {
+    Widget submitButton(BuildContext context) {
       return InkWell(
         onTap: () {
-
+          Navigator.pushNamed(context, '/bonus');
         },
         child: Container(
           margin: const EdgeInsets.only(
@@ -204,7 +204,7 @@ class SignUpPage extends StatelessWidget {
           emailInput(),
           passwordInput(),
           hobbyInput(),
-          submitButton(),
+          submitButton(context),
         ]
       ),
     );
@@ -241,7 +241,7 @@ class SignUpPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           children: [
             title(),
-            input(),
+            input(context),
             tncText(),
           ]
         ),
