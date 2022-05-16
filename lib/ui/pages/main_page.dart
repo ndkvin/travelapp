@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:travelapp/ui/pages/home_page.dart';
 import 'package:travelapp/ui/widgets/button_buttom_navbar.dart';
 
 class MainPage extends StatelessWidget {
@@ -48,7 +49,7 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Text('MAIN PAGE'),
+          HomePage(),
           buttomNavigation(),
         ],
       )
