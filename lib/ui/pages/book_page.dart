@@ -411,8 +411,8 @@ class BookPage extends StatelessWidget {
                 width: double.infinity, 
                 message: "Continue to Checkout", 
                 onTap: () {
-      
-                }
+                  Navigator.pushNamed(context, "/payment");
+                },
               )
             ],
           ),
