@@ -11,6 +11,7 @@ Color greyColor = const Color(0XFF9698A9);
 Color yellowColor =const  Color(0XFFFFA235);
 Color blueColor = const Color(0XFF0EC3AE);
 Color redColor = const Color(0XFFEB70A5);
+Color greyPurple = const Color(0XFFE0D9FF);
 
 TextStyle purpleTextStyle = GoogleFonts.poppins(
   textStyle: TextStyle(

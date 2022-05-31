@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Color(0XFFE5E5E5),
+      color: const Color(0XFFE5E5E5),
       debugShowCheckedModeBanner: false,
       title: 'Travel App',
       home: const SplashPage(),
