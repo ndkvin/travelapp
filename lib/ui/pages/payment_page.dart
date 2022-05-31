@@ -403,10 +403,10 @@ class PaymentPage extends StatelessWidget {
               "Payment Details",
               style: blackSemiBoldTextStyle.copyWith(
                 fontSize: 16,
-              ),asdasd
+              ),
             ),
             const SizedBox(
-              height: 20,asdas
+              height: 20,
             ),
             Row(
               children: [
@@ -487,7 +487,10 @@ class PaymentPage extends StatelessWidget {
                 width: double.infinity, 
                 message: "Pay Now", 
                 onTap: () {
-
+                  Navigator.pushNamed(
+                    context, 
+                    "/payment_success"
+                  );
                 }
               )
             ]

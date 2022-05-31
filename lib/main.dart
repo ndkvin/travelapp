@@ -4,6 +4,7 @@ import 'package:travelapp/ui/pages/book_page.dart';
 import 'package:travelapp/ui/pages/get_started_page.dart';
 import 'package:travelapp/ui/pages/main_page.dart';
 import 'package:travelapp/ui/pages/payment_page.dart';
+import 'package:travelapp/ui/pages/payment_success.dart';
 import 'package:travelapp/ui/pages/sign_up_page.dart';
 import 'package:travelapp/ui/pages/splash_page.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/main': (context) => const MainPage(),
         '/book': (context) => const BookPage(),
         '/payment': (context) => const  PaymentPage(),
+        '/payment_success': (context) => const  PaymentSuccess(),
       },
     );
   }
