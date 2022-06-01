@@ -4,13 +4,11 @@ import 'package:travelapp/cubit/auth_cubit.dart';
 import 'package:travelapp/shared/theme.dart';
 import 'package:travelapp/ui/widgets/custom_button.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  SignInPage({Key? key}) : super(key: key);
 
-  final TextEditingController nameComntroller = TextEditingController(text: '');
   final TextEditingController emailComntroller = TextEditingController(text: '');
   final TextEditingController passwordComntroller = TextEditingController(text: '');
-  final TextEditingController hobbyComntroller = TextEditingController(text: '');
 
   Widget title() {
     return Padding(
@@ -18,47 +16,13 @@ class SignUpPage extends StatelessWidget {
         top: 30,
       ),
       child: Text(
-        'Join us and get\nyour next journey',
+        "Sign in with your\existing account",
         style: blackSemiBoldTextStyle.copyWith(fontSize: 24),
       ),
     );
   }
 
   Widget input(BuildContext context) {
-    Widget nameInput() {
-      return Container(
-        margin: const EdgeInsets.only(
-          bottom: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Full Name',
-              style: blackregulerTextStyle,
-            ),
-            const SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              controller: nameComntroller,
-              cursorColor: blackColor,
-              decoration: InputDecoration(
-                hintText: 'Enter your full name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(color: purpleColor),
-                ),
-              ),
-            )
-          ],
-        ),
-      );
-    }
-
     Widget passwordInput() {
       return Container(
         margin: const EdgeInsets.only(
@@ -80,40 +44,6 @@ class SignUpPage extends StatelessWidget {
               cursorColor: blackColor,
               decoration: InputDecoration(
                 hintText: 'Input password',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(color: purpleColor),
-                ),
-              ),
-            )
-          ],
-        ),
-      );
-    }
-
-    Widget hobbyInput() {
-      return Container(
-        margin: const EdgeInsets.only(
-          bottom: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hobby',
-              style: blackregulerTextStyle,
-            ),
-            const SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              controller: hobbyComntroller,
-              cursorColor: blackColor,
-              decoration: InputDecoration(
-                hintText: 'Input your hobby',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius),
                 ),
@@ -171,10 +101,8 @@ class SignUpPage extends StatelessWidget {
           color: whiteColor,
           borderRadius: BorderRadius.circular(defaultRadius)),
       child: Column(children: [
-        nameInput(),
         emailInput(),
         passwordInput(),
-        hobbyInput(),
         BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if(state is AuthSuccess) {
@@ -197,14 +125,10 @@ class SignUpPage extends StatelessWidget {
 
             return CustomButton(
               width: double.infinity,
-              message: 'Get Started',
+              message: 'Sign In',
               onTap: () {
-                context.read<AuthCubit>().signUp(
-                  email: emailComntroller.text, 
-                  password: passwordComntroller.text, 
-                  name: nameComntroller.text,
-                  hobby: hobbyComntroller.text
-                );
+                context.read<AuthCubit>()
+                  .signIn(email: emailComntroller.text, password: passwordComntroller.text);
               },
               margin: const EdgeInsets.only(
                 top: 30,
@@ -219,37 +143,36 @@ class SignUpPage extends StatelessWidget {
 
 
   @override
-  
   Widget build(BuildContext context) {
-      Widget login() {
-        return InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, '/login');
-          },
-          child: Container(
-            margin: const EdgeInsets.only(top: 50, bottom: 30),
-            child: Text(
-              'Login if you have an account',
-              textAlign: TextAlign.center,
-              style: whiteLightTextStyle.copyWith(
-                color: greyColor,
-                decoration: TextDecoration.underline,
-              ),
+
+    Widget tncText() {
+      return InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, "/sign-up");
+        },
+        child: Container(
+          margin: const EdgeInsets.only(top: 50, bottom: 30),
+          child: Text(
+            'Terms and Conditions',
+            textAlign: TextAlign.center,
+            style: whiteLightTextStyle.copyWith(
+              color: greyColor,
+              decoration: TextDecoration.underline,
             ),
           ),
-        );
-      }
+        ),
+      );
+    }
     return Scaffold(
       backgroundColor: const Color(0XFFE5E5E5),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          children: [
-            title(),
-            input(context),
-            login(),
-          ]
-        ),
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            children: [
+              title(),
+              input(context),
+              tncText(),
+            ]),
       ),
     );
   }

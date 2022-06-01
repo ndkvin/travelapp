@@ -130,12 +130,12 @@ class BonusPage extends StatelessWidget {
                 height: 50,
               ),
               CustomButton(
-                  width: 220,
-                  message: 'Get Started',
-                  onTap: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/main', (route) => false);
-                  }),
+                width: 220,
+                message: 'Get Started',
+                onTap: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main', (route) => false);
+                }),
             ],
           ),
         ),
