@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travelapp/shared/theme.dart';
 import 'package:travelapp/ui/pages/get_started_page.dart';
@@ -16,7 +17,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(Duration(seconds:3), () {
-      Navigator.pushNamed(context, '/get-started');
+      User? user = FirebaseAuth.instance.currentUser;
+
+    if(user == "NULL") {
+      Navigator.of(context).pushReplacementNamed('/get-started');
+    } else {
+      Navigator.of(context).pushReplacementNamed('/main');
+    }
     });
     super.initState();
   }

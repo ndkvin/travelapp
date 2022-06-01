@@ -144,7 +144,7 @@ class BonusPage extends StatelessWidget {
                 width: 220,
                 message: 'Get Started',
                 onTap: () {
-                  Navigator.pushNamed(context, '/main');
+                  Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
                 }
               ),
             ],

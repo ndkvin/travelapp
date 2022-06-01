@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelapp/cubit/auth_cubit.dart';
 import 'package:travelapp/shared/theme.dart';
 import 'package:travelapp/ui/widgets/custom_button.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({ Key? key }) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
+
+  final TextEditingController nameComntroller = TextEditingController(text: '');
+  final TextEditingController emailComntroller = TextEditingController(text: '');
+  final TextEditingController passwordComntroller = TextEditingController(text: '');
+  final TextEditingController hobbyComntroller = TextEditingController(text: '');
 
   Widget title() {
     return Padding(
@@ -12,15 +19,12 @@ class SignUpPage extends StatelessWidget {
       ),
       child: Text(
         'Join us and get\nyour next journey',
-        style: blackSemiBoldTextStyle.copyWith(
-          fontSize: 24
-        ),
+        style: blackSemiBoldTextStyle.copyWith(fontSize: 24),
       ),
     );
   }
 
   Widget input(BuildContext context) {
-
     Widget nameInput() {
       return Container(
         margin: const EdgeInsets.only(
@@ -37,6 +41,7 @@ class SignUpPage extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: nameComntroller,
               cursorColor: blackColor,
               decoration: InputDecoration(
                 hintText: 'Enter your full name',
@@ -45,9 +50,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(
-                    color: purpleColor
-                  ),
+                  borderSide: BorderSide(color: purpleColor),
                 ),
               ),
             )
@@ -72,6 +75,7 @@ class SignUpPage extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: passwordComntroller,
               obscureText: true,
               cursorColor: blackColor,
               decoration: InputDecoration(
@@ -81,9 +85,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(
-                    color: purpleColor
-                  ),
+                  borderSide: BorderSide(color: purpleColor),
                 ),
               ),
             )
@@ -108,6 +110,7 @@ class SignUpPage extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: hobbyComntroller,
               cursorColor: blackColor,
               decoration: InputDecoration(
                 hintText: 'Input your hobby',
@@ -116,9 +119,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(
-                    color: purpleColor
-                  ),
+                  borderSide: BorderSide(color: purpleColor),
                 ),
               ),
             )
@@ -143,6 +144,7 @@ class SignUpPage extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: emailComntroller,
               cursorColor: blackColor,
               decoration: InputDecoration(
                 hintText: 'example@gmail.com',
@@ -151,9 +153,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius),
-                  borderSide: BorderSide(
-                    color: purpleColor
-                  ),
+                  borderSide: BorderSide(color: purpleColor),
                 ),
               ),
             )
@@ -162,50 +162,65 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-
     return Container(
       margin: const EdgeInsets.only(
         top: 30,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 30
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(defaultRadius)
-      ),
-      child: Column(  
-        children: [
-          nameInput(),
-          emailInput(),
-          passwordInput(),
-          hobbyInput(),
-          CustomButton(
-            width: double.infinity,
-            message: 'Get Started',
-            onTap: () {
-              Navigator.pushNamed(context, '/bonus');
-            },
-            margin: const EdgeInsets.only(
-              top: 30,
-            ),
-          )
-        ]
-      ),
+          color: whiteColor,
+          borderRadius: BorderRadius.circular(defaultRadius)),
+      child: Column(children: [
+        nameInput(),
+        emailInput(),
+        passwordInput(),
+        hobbyInput(),
+        BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if(state is AuthSuccess) {
+              Navigator.pushNamedAndRemoveUntil(context, "/bonus", (route) => false);
+            } else if (state is AuthFiled) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: redColor,
+                  content: Text(state.message),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if(state is AuthLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return CustomButton(
+              width: double.infinity,
+              message: 'Get Started',
+              onTap: () {
+                context.read<AuthCubit>().signUp(
+                  email: emailComntroller.text, 
+                  password: passwordComntroller.text, 
+                  name: nameComntroller.text,
+                  hobby: hobbyComntroller.text
+                );
+              },
+              margin: const EdgeInsets.only(
+                top: 30,
+              ),
+            );
+          },
+        )
+      ]),
     );
   }
-  
+
   Widget tncText() {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Container(
-        margin: const EdgeInsets.only(
-          top: 50,
-          bottom: 30
-        ),
+        margin: const EdgeInsets.only(top: 50, bottom: 30),
         child: Text(
           'Terms and Conditions',
           textAlign: TextAlign.center,
@@ -224,13 +239,12 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: const Color(0XFFE5E5E5),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          children: [
-            title(),
-            input(context),
-            tncText(),
-          ]
-        ),
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            children: [
+              title(),
+              input(context),
+              tncText(),
+            ]),
       ),
     );
   }
