@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:travelapp/cubit/page_cubit.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ButtonButtomNavbar extends StatelessWidget {
 
-  final bool isSelected;
+  final int index;
   final String icon;
 
-  const ButtonButtomNavbar({
+  ButtonButtomNavbar({
     Key? key,
-    this.isSelected = false,
+    required this.index,
     required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(),
-        Container(
-          height: 24,
-          width: 24,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(icon),
-            )
+    return GestureDetector(
+      onTap: () {
+        context.read<PageCubit>().setPage(index);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(),
+          Image.asset(
+            icon,
+            height: 24,
+            width: 24,
+            color: context.read<PageCubit>().state == index ? purpleColor : blackColor,
           ),
-        ),
-        Container(
-          height: 2,
-          width: 30,
-          decoration: BoxDecoration(
-            color: isSelected ? purpleColor : whiteColor,
-            borderRadius: BorderRadius.circular(18)
-          ),
-        )
-      ],
+          Container(
+            height: 2,
+            width: 30,
+            decoration: BoxDecoration(
+              color:  context.read<PageCubit>().state == index ? purpleColor : whiteColor,
+              borderRadius: BorderRadius.circular(18)
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelapp/cubit/page_cubit.dart';
 import 'package:travelapp/ui/pages/bonus_page.dart';
 import 'package:travelapp/ui/pages/book_page.dart';
 import 'package:travelapp/ui/pages/get_started_page.dart';
@@ -15,21 +17,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      color: const Color(0XFFE5E5E5),
-      debugShowCheckedModeBanner: false,
-      title: 'Travel App',
-      home: const SplashPage(),
-      routes: {
-        '/splash': (context) => const SplashPage(),
-        '/get-started': (context) => const GetStartedPage(),
-        '/sign-up': (context) => const SignUpPage(),
-        '/bonus': (context) => const BonusPage(),
-        '/main': (context) => const MainPage(),
-        '/book': (context) => const BookPage(),
-        '/payment': (context) => const  PaymentPage(),
-        '/payment_success': (context) => const  PaymentSuccess(),
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PageCubit(),
+        )
+      ],
+      child: MaterialApp(
+        color: const Color(0XFFE5E5E5),
+        debugShowCheckedModeBanner: false,
+        title: 'Travel App',
+        home: const SplashPage(),
+        routes: {
+          '/splash': (context) => const SplashPage(),
+          '/get-started': (context) => const GetStartedPage(),
+          '/sign-up': (context) => const SignUpPage(),
+          '/bonus': (context) => const BonusPage(),
+          '/main': (context) => const MainPage(),
+          '/book': (context) => const BookPage(),
+          '/payment': (context) => const  PaymentPage(),
+          '/payment_success': (context) => const  PaymentSuccess(),
+        },
+      ),
     );
   }
 }
