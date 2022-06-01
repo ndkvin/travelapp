@@ -1,4 +1,5 @@
 import "package:firebase_auth/firebase_auth.dart";
+import 'package:travelapp/cubit/auth_cubit.dart';
 import 'package:travelapp/models/user_model.dart';
 import 'package:travelapp/services/user_service.dart';
 
@@ -29,4 +30,12 @@ class AuthSevice {
       throw e;
     }
   }
+
+  Future<void> SignOut () async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      throw e;
+    }
+  } 
 }

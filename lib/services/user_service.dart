@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelapp/models/user_model.dart';
 
@@ -14,6 +12,21 @@ class UserService {
         'hobby': user.hobby,
         'balance': user.balance,
       });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<UserModel> getUser(String id) async {
+    try {
+      DocumentSnapshot userSnapshot = await _userCollection.doc(id).get();
+      return UserModel(
+        id: id,
+        email: userSnapshot['email'],
+        name: userSnapshot['name'],
+        hobby: userSnapshot['hobby'],
+        balance: userSnapshot['balance'],
+      );
     } catch (e) {
       throw e;
     }
