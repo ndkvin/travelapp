@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     Timer(Duration(seconds: 3), () {
       User? user = FirebaseAuth.instance.currentUser;
-      print(user);
+
       if (user == null) {
         Navigator.of(context).pushReplacementNamed('/get-started');
       } else {

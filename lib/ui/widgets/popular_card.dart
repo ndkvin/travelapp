@@ -1,17 +1,25 @@
 import "package:flutter/material.dart";
+import 'package:travelapp/models/destination_model.dart';
 import 'package:travelapp/shared/theme.dart';
 import 'package:travelapp/ui/pages/detail_page.dart';
 
 class popularCard extends StatelessWidget {
-  const popularCard({ Key? key }) : super(key: key);
+  final DestinationModel destination;
+
+  popularCard({
+    Key? key,
+    required this.destination,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(destination);
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => const DetailPage())
-        );
+          builder: (BuildContext context) { 
+            return DetailPage(destination);
+          }));
       },
       child: Container(
         margin: const EdgeInsets.only(
@@ -34,9 +42,9 @@ class popularCard extends StatelessWidget {
               width: 180,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(defaultRadius+3),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/images/ciliiwung.png',
+                image: DecorationImage(
+                  image: NetworkImage(
+                    destination.imageUrl,
                   ),
                   fit: BoxFit.cover,
                 )
@@ -61,7 +69,7 @@ class popularCard extends StatelessWidget {
                           size: 24,
                         ),
                         Text(
-                          "4.8",
+                          destination.rating.toString(),
                           style: whiteMediumTextStyle.copyWith(
                             fontSize: 14,
                             color: blackColor
@@ -82,7 +90,7 @@ class popularCard extends StatelessWidget {
                 top: 10
               ),
               child: Text(
-                "Ciliiwung",
+                destination.name,
                 style: whiteMediumTextStyle.copyWith(
                   color: blackColor
                 ),
@@ -93,7 +101,7 @@ class popularCard extends StatelessWidget {
                 horizontal: 10
               ),
               child: Text(
-                "Tangerang",
+                destination.city,
                 style: whiteLightTextStyle.copyWith(
                   color: greyColor,
                   fontSize: 14
