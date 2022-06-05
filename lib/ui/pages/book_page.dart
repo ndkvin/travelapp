@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:travelapp/cubit/seat_cubit.dart';
 import 'package:travelapp/models/destination_model.dart';
+import 'package:travelapp/models/transaction_model.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:travelapp/ui/pages/payment_page.dart';
 import 'package:travelapp/ui/widgets/custom_button.dart';
 import 'package:travelapp/ui/widgets/seat_widget.dart';
 
@@ -351,6 +353,34 @@ class BookPage extends StatelessWidget {
       );
     }
 
+    Widget button() {
+      return BlocBuilder<SeatCubit, List<String>>(
+        builder: (context, state) {
+          return CustomButton(
+              width: double.infinity,
+              message: "Continue to Checkout",
+              onTap: () {
+                int price = state.length*destionation.price;
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => PaymentPage(
+                    transaction: TrasactionModel(
+                      destination: destionation,
+                      traveler: state.length,
+                      seat: state.join(", "),
+                      insurence: true,
+                      refundable: false,
+                      price:price,
+                      total: price+(price*0.45),
+                    ),
+                  ),
+                )
+              );
+            },
+          );
+        },
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -362,13 +392,7 @@ class BookPage extends StatelessWidget {
             children: [
               header(),
               seat(),
-              CustomButton(
-                width: double.infinity,
-                message: "Continue to Checkout",
-                onTap: () {
-                  Navigator.pushNamed(context, "/payment");
-                },
-              )
+              button()
             ],
           ),
         ),

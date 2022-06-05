@@ -1,9 +1,16 @@
 import "package:flutter/material.dart";
+import 'package:intl/intl.dart';
+import 'package:travelapp/models/transaction_model.dart';
 import 'package:travelapp/shared/theme.dart';
 import 'package:travelapp/ui/widgets/custom_button.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({ Key? key }) : super(key: key);
+  final TrasactionModel transaction; 
+
+  const PaymentPage({
+    Key? key,
+    required this.transaction
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,7 @@ class PaymentPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Tangerang",
+                        "Jakarta",
                         style: whiteLightTextStyle.copyWith(
                           fontSize: 14,
                           color: greyColor,
@@ -67,7 +74,7 @@ class PaymentPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "ciliwung",
+                        transaction.destination.city,
                         style: whiteLightTextStyle.copyWith(
                           fontSize: 14,
                           color: greyColor,
@@ -104,8 +111,8 @@ class PaymentPage extends StatelessWidget {
                     height: 70,
                     width: 70,
                     decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/ciliwung1.png'),
+                      image: DecorationImage(
+                        image: NetworkImage(transaction.destination.imageUrl),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(18),
@@ -120,7 +127,7 @@ class PaymentPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "Lake Ciliwung",
+                          transaction.destination.name,
                           style: whiteMediumTextStyle.copyWith(
                             fontSize: 18,
                             color: blackColor,
@@ -130,7 +137,7 @@ class PaymentPage extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "Tanggerang",
+                          transaction.destination.city,
                           style: whiteLightTextStyle.copyWith(
                             fontSize: 14,
                             color: greyColor,
@@ -150,7 +157,7 @@ class PaymentPage extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        "4.8",
+                        transaction.destination.rating.toString(),
                         style: whiteMediumTextStyle.copyWith(
                           fontSize: 14,
                           color: blackColor,
@@ -191,7 +198,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "2 person",
+                    "${transaction.traveler} person",
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                     ),
@@ -220,7 +227,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "A3, A4",
+                    "${transaction.seat}",
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                     ),
@@ -249,7 +256,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "YES",
+                    transaction.insurence ? "YES" : "NO",
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                       color: blueColor
@@ -279,7 +286,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "NO",
+                    transaction.refundable ? "YES" : "NO",
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                       color: redColor
@@ -338,7 +345,11 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "IDR 8.500.690",
+                    NumberFormat.currency(
+                        locale: 'id',
+                        symbol: 'IDR ',
+                      )
+                      .format(transaction.price),
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                     ),
@@ -367,7 +378,11 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "IDR 12.000.000",
+                    NumberFormat.currency(
+                        locale: 'id',
+                        symbol: 'IDR ',
+                      )
+                      .format(transaction.total),
                     style: blackSemiBoldTextStyle.copyWith(
                       fontSize: 14,
                       color: purpleColor

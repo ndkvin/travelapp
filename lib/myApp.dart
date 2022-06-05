@@ -7,7 +7,6 @@ import 'package:travelapp/cubit/seat_cubit.dart';
 import 'package:travelapp/ui/pages/bonus_page.dart';
 import 'package:travelapp/ui/pages/get_started_page.dart';
 import 'package:travelapp/ui/pages/main_page.dart';
-import 'package:travelapp/ui/pages/payment_page.dart';
 import 'package:travelapp/ui/pages/payment_success.dart';
 import 'package:travelapp/ui/pages/sign_in_page.dart';
 import 'package:travelapp/ui/pages/sign_up_page.dart';
@@ -44,7 +43,6 @@ class MyApp extends StatelessWidget {
           '/sign-up': (context) => SignUpPage(),
           '/bonus': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
-          '/payment': (context) => const  PaymentPage(),
           '/payment_success': (context) => const  PaymentSuccess(),
           '/login': (context) => SignInPage(),
         },
