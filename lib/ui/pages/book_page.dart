@@ -189,10 +189,10 @@ class BookPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SeatWidget(
-                  status: 1,
+                  id: "A1"
                 ),
                 SeatWidget(
-                  status: 2,
+                  id: "B1"
                 ),
                 Container(
                   height: 48,
@@ -208,10 +208,10 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "C1"
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "D1"
                 ),
               ]
             ),
@@ -222,17 +222,17 @@ class BookPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SeatWidget(
-                  status: 1,
+                  id: "A2"
                 ),
                 SeatWidget(
-                  status: 2,
+                  id: "B2"
                 ),
                 Container(
                   height: 48,
                   width: 48,
                   child: Center(
                     child: Text(
-                      "2", 
+                      "1", 
                       style: blackregulerTextStyle.copyWith(
                         color: greyColor,
                         fontSize: 14,
@@ -241,10 +241,10 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "C2"
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "D2"
                 ),
               ]
             ),
@@ -255,17 +255,17 @@ class BookPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SeatWidget(
-                  status: 1,
+                  id: "A3"
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "B3"
                 ),
                 Container(
                   height: 48,
                   width: 48,
                   child: Center(
                     child: Text(
-                      "3", 
+                      "1", 
                       style: blackregulerTextStyle.copyWith(
                         color: greyColor,
                         fontSize: 14,
@@ -274,10 +274,10 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "C3"
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "D3"
                 ),
               ]
             ),
@@ -288,17 +288,18 @@ class BookPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SeatWidget(
-                  status: 1,
+                  id: "A5",
+                  isAvailable: false
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "B5"
                 ),
                 Container(
                   height: 48,
                   width: 48,
                   child: Center(
                     child: Text(
-                      "4", 
+                      "1", 
                       style: blackregulerTextStyle.copyWith(
                         color: greyColor,
                         fontSize: 14,
@@ -307,10 +308,10 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "C5"
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "D5"
                 ),
               ]
             ),
@@ -321,17 +322,17 @@ class BookPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SeatWidget(
-                  status: 1,
+                  id: "A1"
                 ),
                 SeatWidget(
-                  status: 0,
+                  id: "B1"
                 ),
                 Container(
                   height: 48,
                   width: 48,
                   child: Center(
                     child: Text(
-                      "5", 
+                      "1", 
                       style: blackregulerTextStyle.copyWith(
                         color: greyColor,
                         fontSize: 14,
@@ -340,37 +341,12 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "C1"
                 ),
                 SeatWidget(
-                  status: 1,
+                  id: "D1"
                 ),
               ]
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Your Seat",
-                  style: blackregulerTextStyle.copyWith(
-                    fontSize: 14,
-                    color: greyColor,
-                  ),
-                ),
-                Text(
-                  "A3, B3",
-                  style: whiteMediumTextStyle.copyWith(
-                    fontSize: 16,
-                    color: blackColor
-                  ),
-                )
-              ]
-            ),
-            const SizedBox(
-              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

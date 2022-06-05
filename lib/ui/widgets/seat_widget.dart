@@ -1,62 +1,77 @@
 import "package:flutter/material.dart";
+import 'package:travelapp/cubit/seat_cubit.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SeatWidget extends StatelessWidget {
-  final int status;
+class SeatWidget extends StatefulWidget {
+  bool isAvailable;
+  String id;
 
-  SeatWidget({
-    Key? key,
-    required this.status
-  }) : super(key: key);
+  SeatWidget({Key? key, this.isAvailable = true, required this.id})
+      : super(key: key);
 
   @override
+  State<SeatWidget> createState() => _SeatWidgetState(isAvailable, id);
+}
+
+class _SeatWidgetState extends State<SeatWidget> {
+  bool isAvailable;
+  String id;
+
+  _SeatWidgetState(this.isAvailable, this.id);
+  @override
   Widget build(BuildContext context) {
+    bool isSelected = context.read<SeatCubit>().isSelected(id);
+
     Color bgColor() {
-      switch(status) {
-        case 0:
-          return greyPurple;
-        case 1:
+      if (!isAvailable) {
+        return greyColor;
+      } else {
+        if (isSelected) {
           return purpleColor;
-        case 2:
-          return greyColor;
-        default:
-          return greyColor;
+        } else {
+          return greyPurple;
+        }
       }
     }
 
     Color borderColor() {
-      switch(status) {
-        case 0:
-          return purpleColor;
-        case 1:
-          return purpleColor;
-        case 2:
-          return greyColor;
-        default:
-          return greyColor;
+      if (!isAvailable) {
+        return greyColor;
+      } else {
+        return purpleColor;
       }
     }
 
-    return Container(
-      height: 48,
-      width: 48,
-      decoration: BoxDecoration(
-        color: bgColor(),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: borderColor(),
-          width: 2,
-        ),
-      ),
-      child: Center(
-        child: Text(
-          status == 1 ? "YOU" : "", 
-          style: blackSemiBoldTextStyle.copyWith(
-            color: whiteColor,
-            fontSize: 14,
-          )
-        ),
-      ),
+    return BlocBuilder<SeatCubit, List<String>>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            if(isAvailable) {
+              context.read<SeatCubit>().addSeat(id);
+            }
+          },
+          child: Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              color: bgColor(),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: borderColor(),
+                width: 2,
+              ),
+            ),
+            child: Center(
+              child: Text(isSelected ? "YOU" : "",
+                  style: blackSemiBoldTextStyle.copyWith(
+                    color: whiteColor,
+                    fontSize: 14,
+                  )),
+            ),
+          ),
+        );
+      },
     );
   }
 }
