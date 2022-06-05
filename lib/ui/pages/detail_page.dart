@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 import 'package:travelapp/models/destination_model.dart';
 import 'package:travelapp/shared/theme.dart';
+import 'package:travelapp/ui/pages/book_page.dart';
 import 'package:travelapp/ui/widgets/custom_button.dart';
 import 'package:travelapp/ui/widgets/interests_widget.dart';
 import 'package:travelapp/ui/widgets/photo_detail_widget.dart';
@@ -247,7 +248,10 @@ class DetailPage extends StatelessWidget {
                       width: 170,
                       message: "Book Now",
                       onTap: () {
-                        Navigator.pushNamed(context, '/book');
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => BookPage(destionation: destination,) 
+                          )
+                        );
                       }
                     )
                   ],

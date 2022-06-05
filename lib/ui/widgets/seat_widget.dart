@@ -21,7 +21,7 @@ class _SeatWidgetState extends State<SeatWidget> {
   _SeatWidgetState(this.isAvailable, this.id);
   @override
   Widget build(BuildContext context) {
-    bool isSelected = context.read<SeatCubit>().isSelected(id);
+    bool isSelected = context.watch<SeatCubit>().isSelected(id);
 
     Color bgColor() {
       if (!isAvailable) {
@@ -43,35 +43,32 @@ class _SeatWidgetState extends State<SeatWidget> {
       }
     }
 
-    return BlocBuilder<SeatCubit, List<String>>(
-      builder: (context, state) {
-        return GestureDetector(
-          onTap: () {
-            if(isAvailable) {
-              context.read<SeatCubit>().addSeat(id);
-            }
-          },
-          child: Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: bgColor(),
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(
-                color: borderColor(),
-                width: 2,
-              ),
-            ),
-            child: Center(
-              child: Text(isSelected ? "YOU" : "",
-                  style: blackSemiBoldTextStyle.copyWith(
-                    color: whiteColor,
-                    fontSize: 14,
-                  )),
-            ),
-          ),
-        );
+
+    return GestureDetector(
+      onTap: () {
+        if(isAvailable) {
+          context.read<SeatCubit>().addSeat(id);
+        }
       },
+      child: Container(
+        height: 48,
+        width: 48,
+        decoration: BoxDecoration(
+          color: bgColor(),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: borderColor(),
+            width: 2,
+          ),
+        ),
+        child: Center(
+          child: Text(isSelected ? "YOU" : "",
+              style: blackSemiBoldTextStyle.copyWith(
+                color: whiteColor,
+                fontSize: 14,
+              )),
+        ),
+      ),
     );
   }
 }

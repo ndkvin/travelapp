@@ -5,7 +5,6 @@ import 'package:travelapp/cubit/destination_cubit.dart';
 import 'package:travelapp/cubit/page_cubit.dart';
 import 'package:travelapp/cubit/seat_cubit.dart';
 import 'package:travelapp/ui/pages/bonus_page.dart';
-import 'package:travelapp/ui/pages/book_page.dart';
 import 'package:travelapp/ui/pages/get_started_page.dart';
 import 'package:travelapp/ui/pages/main_page.dart';
 import 'package:travelapp/ui/pages/payment_page.dart';
@@ -45,7 +44,6 @@ class MyApp extends StatelessWidget {
           '/sign-up': (context) => SignUpPage(),
           '/bonus': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
-          '/book': (context) => const BookPage(),
           '/payment': (context) => const  PaymentPage(),
           '/payment_success': (context) => const  PaymentSuccess(),
           '/login': (context) => SignInPage(),

@@ -7,10 +7,10 @@ class SeatCubit extends Cubit<List<String>> {
     print("prev ${state}");
     if(!isSelected(seatId)) {
       state.add(seatId);
-      emit(state);
+      emit(List.of(state));
     } else {
       state.remove(seatId);
-      emit(state);
+      emit(List.of(state));
     }
     print("next ${state}");
   }
